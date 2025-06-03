@@ -96,26 +96,90 @@ darkModeToggle.addEventListener('click', () => {
         '<i class="fas fa-moon"></i>';
 });
 
-// Project tabs functionality
+// Project filtering
 const projectTabs = document.querySelectorAll('.project-tab');
 const projectCards = document.querySelectorAll('.project-card');
 
+// Initially hide all projects except the active category
+function filterProjects(category) {
+    projectCards.forEach(card => {
+        if (card.dataset.category === category) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+// Set initial state
+filterProjects('games');
+
+// Add click handlers to tabs
 projectTabs.forEach(tab => {
     tab.addEventListener('click', () => {
-        // Remove active class from all tabs
+        // Update active state
         projectTabs.forEach(t => t.classList.remove('active'));
-        // Add active class to clicked tab
         tab.classList.add('active');
         
-        const category = tab.getAttribute('data-category');
-        
-        // Show/hide projects based on category
-        projectCards.forEach(card => {
-            if (category === 'all' || card.getAttribute('data-category') === category) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
+        // Filter projects
+        filterProjects(tab.dataset.category);
     });
+});
+
+// Scroll Progress Indicator
+const scrollProgressBar = document.querySelector('.scroll-progress-bar');
+
+window.addEventListener('scroll', () => {
+    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (window.scrollY / windowHeight) * 100;
+    scrollProgressBar.style.width = `${scrolled}%`;
+});
+
+// Sidebar Functionality
+const scrollToTopBtn = document.getElementById('scrollToTop');
+const toggleThemeBtn = document.getElementById('toggleTheme');
+const toggleMusicBtn = document.getElementById('toggleMusic');
+
+// Scroll to Top
+scrollToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// Toggle Theme (reusing existing dark mode functionality)
+toggleThemeBtn.addEventListener('click', () => {
+    darkModeToggle.click();
+});
+
+// Background Music
+let isMusicPlaying = false;
+const backgroundMusic = new Audio('background-music.mp3');
+backgroundMusic.loop = true;
+
+toggleMusicBtn.addEventListener('click', () => {
+    if (isMusicPlaying) {
+        backgroundMusic.pause();
+        toggleMusicBtn.innerHTML = '<i class="fas fa-music"></i>';
+    } else {
+        backgroundMusic.play();
+        toggleMusicBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+    }
+    isMusicPlaying = !isMusicPlaying;
+});
+
+// Show/hide sidebar based on scroll position
+let lastScrollY = window.scrollY;
+const sidebar = document.querySelector('.sidebar');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        sidebar.style.opacity = '1';
+        sidebar.style.visibility = 'visible';
+    } else {
+        sidebar.style.opacity = '0';
+        sidebar.style.visibility = 'hidden';
+    }
+    lastScrollY = window.scrollY;
 }); 

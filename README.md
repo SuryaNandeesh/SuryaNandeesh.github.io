@@ -21,9 +21,15 @@ Visit the live website at: [suryanandeesh.github.io](https://suryanandeesh.githu
 
 ## Projects Showcase
 The website features a collection of my game development and software projects, including:
-- Space Game
+
+### Game Development
 - The 300 Second Breakout
 - SwitchFlip (Capstone Project)
+- OscorpGames (C# Mini Game Collection)
+- UNO Game (Team Project)
+- Boss Rush Clicker (Team Project)
+
+### Software Development
 - Portfolio Website
 
 ## Contact
