@@ -94,4 +94,28 @@ darkModeToggle.addEventListener('click', () => {
     darkModeToggle.innerHTML = newTheme === 'dark' ? 
         '<i class="fas fa-sun"></i>' : 
         '<i class="fas fa-moon"></i>';
+});
+
+// Project tabs functionality
+const projectTabs = document.querySelectorAll('.project-tab');
+const projectCards = document.querySelectorAll('.project-card');
+
+projectTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        // Remove active class from all tabs
+        projectTabs.forEach(t => t.classList.remove('active'));
+        // Add active class to clicked tab
+        tab.classList.add('active');
+        
+        const category = tab.getAttribute('data-category');
+        
+        // Show/hide projects based on category
+        projectCards.forEach(card => {
+            if (category === 'all' || card.getAttribute('data-category') === category) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
 }); 
