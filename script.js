@@ -138,7 +138,6 @@ window.addEventListener('scroll', () => {
 // Sidebar Functionality
 const scrollToTopBtn = document.getElementById('scrollToTop');
 const toggleThemeBtn = document.getElementById('toggleTheme');
-const toggleMusicBtn = document.getElementById('toggleMusic');
 
 // Scroll to Top
 scrollToTopBtn.addEventListener('click', () => {
@@ -151,22 +150,6 @@ scrollToTopBtn.addEventListener('click', () => {
 // Toggle Theme (reusing existing dark mode functionality)
 toggleThemeBtn.addEventListener('click', () => {
     darkModeToggle.click();
-});
-
-// Background Music
-let isMusicPlaying = false;
-const backgroundMusic = new Audio('background-music.mp3');
-backgroundMusic.loop = true;
-
-toggleMusicBtn.addEventListener('click', () => {
-    if (isMusicPlaying) {
-        backgroundMusic.pause();
-        toggleMusicBtn.innerHTML = '<i class="fas fa-music"></i>';
-    } else {
-        backgroundMusic.play();
-        toggleMusicBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-    }
-    isMusicPlaying = !isMusicPlaying;
 });
 
 // Show/hide sidebar based on scroll position
