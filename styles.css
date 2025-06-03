@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 :root {
@@ -12,7 +13,18 @@
     --light-text: #6b7280;
     --background: #ffffff;
     --section-bg: #f3f4f6;
+    --card-bg: #ffffff;
     --transition: all 0.3s ease;
+}
+
+[data-theme="dark"] {
+    --primary-color: #3b82f6;
+    --secondary-color: #60a5fa;
+    --text-color: #f3f4f6;
+    --light-text: #d1d5db;
+    --background: #111827;
+    --section-bg: #1f2937;
+    --card-bg: #374151;
 }
 
 html {
@@ -23,6 +35,28 @@ body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
+    background-color: var(--background);
+    transition: var(--transition);
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.dark-mode-toggle:hover {
+    background-color: var(--section-bg);
+}
+
+[data-theme="dark"] .dark-mode-toggle {
+    color: var(--text-color);
 }
 
 /* Navigation */
@@ -30,7 +64,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(var(--background), 0.95);
     backdrop-filter: blur(10px);
     z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -177,7 +211,7 @@ section h2 {
 }
 
 .skill-category {
-    background: white;
+    background: var(--card-bg);
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -234,8 +268,8 @@ section h2 {
 
 /* Footer */
 footer {
-    background: var(--text-color);
-    color: white;
+    background: var(--section-bg);
+    color: var(--text-color);
     padding: 2rem;
     text-align: center;
 }

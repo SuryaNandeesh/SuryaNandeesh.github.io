@@ -66,4 +66,32 @@ document.querySelector('.nav-content').appendChild(mobileMenuButton);
 mobileMenuButton.addEventListener('click', () => {
     const navLinks = document.querySelector('.nav-links');
     navLinks.classList.toggle('active');
+});
+
+// Dark mode functionality
+const darkModeToggle = document.getElementById('darkModeToggle');
+const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+// Check for saved theme preference or use system preference
+const currentTheme = localStorage.getItem('theme') || 
+    (prefersDarkScheme.matches ? 'dark' : 'light');
+
+// Apply the theme
+if (currentTheme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+}
+
+// Toggle theme
+darkModeToggle.addEventListener('click', () => {
+    let theme = document.documentElement.getAttribute('data-theme');
+    let newTheme = theme === 'dark' ? 'light' : 'dark';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    
+    // Update icon
+    darkModeToggle.innerHTML = newTheme === 'dark' ? 
+        '<i class="fas fa-sun"></i>' : 
+        '<i class="fas fa-moon"></i>';
 }); 
